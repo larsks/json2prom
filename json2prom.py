@@ -1,3 +1,4 @@
+import argparse
 import asyncio
 import httpx
 import json
@@ -92,8 +93,8 @@ def start_background_tasks(T):
     return _start_wrapper
 
 
-def create_app():
-    with open("config.json") as fd:
+def create_app(config_file="config.json"):
+    with open(config_file) as fd:
         config = json.load(fd)
 
     T = Transformer(config.get("nameprefix"), config.get("labels"), config["sources"])
@@ -116,5 +117,17 @@ def create_app():
     return app
 
 
-app = create_app()
-web.run_app(app)
+def main():
+    p = argparse.ArgumentParser()
+    p.add_argument(
+        "--config-file",
+        "-f",
+        default=os.environ.get("JSON2PROM_CONFIG_FILE", "config.json"),
+    )
+    args = p.parse_args()
+    app = create_app(config_file=args.config_file)
+    web.run_app(app)
+
+
+if __name__ == "__main__":
+    main()
