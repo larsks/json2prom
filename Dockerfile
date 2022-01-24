@@ -7,4 +7,4 @@ COPY Pipfile* /app/
 RUN pipenv install
 COPY . /app
 
-CMD ["pipenv", "run", "python", "json2prom.py"]
+ENTRYPOINT ["pipenv", "run", "python", "json2prom.py"]
