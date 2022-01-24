@@ -1,4 +1,4 @@
-FROM docker.io/python:3.10
+FROM quay.io/larsks/python:3.10
 
 RUN pip install pipenv
 
