@@ -5,9 +5,8 @@ name = "pypi"
 
 [packages]
 httpx = "*"
-flask = "*"
 jsonpath-ng = "*"
-aiohttp = "*"
+prometheus-client = "*"
 
 [dev-packages]
 
